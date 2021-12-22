@@ -62,18 +62,17 @@ export async function sendComment(text: string, setting: MyPluginSettings) {
 
 	const templateText = text;
 
-	// const issueArray = (await getIssues()).filter((s) =>
-	//   s.title.includes(getDate())
-	// )
+	const issueArray = (await getIssues()).filter((s) =>
+	  s.title.includes(getDate())
+	)
 
-	const issueArray = await getIssues();
 	// if not issue, return
 	if (issueArray.length === 0) return new Notice("no issue");
 
 	const issue = issueArray[0];
 
 	// if already commented, return
-	// if (await isCommented(issue)) return new Notice("already commented");
+	if (await isCommented(issue)) return new Notice("already commented");
 
 	await commentIssue(issue, templateText);
 	new Notice("comment success");
