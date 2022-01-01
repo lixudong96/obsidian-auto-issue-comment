@@ -43,7 +43,8 @@ export async function sendComment(text: string, setting: MyPluginSettings) {
 
 	function getDate() {
 		let date = new Date();
-		return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+		const fillZero = (num: number) => (num < 10 ? `0${num}` : num)
+		return `${date.getFullYear()}-${fillZero(date.getMonth() + 1)}-${fillZero(date.getDate())}`
 	}
 
 	async function getIssueComments(issue: Issue) {
